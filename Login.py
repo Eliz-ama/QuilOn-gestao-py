@@ -1,5 +1,6 @@
 from tkinter import*
 from PIL import Image, ImageTk
+import subprocess
 Login=Tk()
 
 taskBarHeight = 40
@@ -22,6 +23,9 @@ Login.minsize(width, height)
 
 Login.geometry("%dx%d+%d+%d" % (width, height, posx, posy))
 Login.configure(bg='#fff')
+
+def entre():
+    subprocess.run(["python", "Home.py"])
 
 #titulo bem-vindo
 txt_titulo = Label(Login,text="Bem-vindo" ,bg = "#FFF", font=("Helvetica 20"), foreground="#F6AA1C")
@@ -64,7 +68,7 @@ lbl_duracao = Entry(Login)
 lbl_duracao.place(relx = .465, rely = .59, anchor = "n",  width="190" , height="20")
 
 #botões de Entrar
-btn_salvar=Button(Login,text="Entar", bg="#F6AA1C")
+btn_salvar=Button(Login,text="Entrar", bg="#F6AA1C", command=lambda:entre())
 btn_salvar.place(relx = .4650, rely = .70, anchor = "n",  width="80" , height="25")
 
 # segunda parte criar contar

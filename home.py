@@ -1,6 +1,7 @@
 from tkinter import*
 from PIL import Image, ImageTk
 home=Tk()
+import subprocess
 
 taskBarHeight = 40
 
@@ -22,6 +23,9 @@ home.minsize(width, height)
 
 home.geometry("%dx%d+%d+%d" % (width, height, posx, posy))
 home.configure(bg='#fff')
+
+def seguir():
+    subprocess.run(["python", "painel.py"])
 
 #Estilização do logo
 logo_quilon_origin = Image.open("img/QuilOn.png")
@@ -65,7 +69,7 @@ painel_resize = painel_origin.resize((20, 20), Image.ANTIALIAS)
 pai = ImageTk.PhotoImage(painel_resize)
 painel = Label(home, image = pai , bg="#fff")
 painel.place(relx = .05, rely = .60, anchor = "n")
-txt_titulo = Label(home,text="Painel de vendas" ,bg = "#FFF", font=("Helvetica 10 underline"), foreground="#777777")
+txt_titulo = Button(home,text="Painel de vendas" ,bg = "#FFF", font=("Helvetica 10 underline"), foreground="#777777", command=lambda:seguir())
 txt_titulo.place(relx = .12, rely = .60, anchor = "n")
 
 #faça eventos
