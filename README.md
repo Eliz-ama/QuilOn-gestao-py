@@ -2,16 +2,16 @@
 Interface de gestão da plataforma QuilOn feita em Python desktop
 
 Para o bom funcionamento deste programa, por favor tenha o seguinte item instalado:
--MongoDB 
+°MongoDB 
 Faça o dowload, para seu modelo de Notebook/PC
 
 Instale as seguintes bibliotecas em seu terminal
--Pymongo :
+°Pymongo :
 pip install pymongo
 
--PIL :
+°PIL :
 pip install Pillow
 
--Tkinter:
+°Tkinter:
 python -m tkinter
 
