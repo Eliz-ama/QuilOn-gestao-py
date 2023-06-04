@@ -1,18 +1,35 @@
-from tkinter import*
+from pymongo import MongoClient
+from bson import ObjectId
 from PIL import Image, ImageTk
+from tkinter import *
+
 import subprocess
-Login=Tk()
+import os
 
-taskBarHeight = 40
+client = MongoClient("mongodb://localhost:27017")
+db = client["QuilOn"]
+collection = db["usuario"]
 
-#Configurações da tela
-Login.title("Acesso ao QuilOn")
-Login.resizable(False, False)
+def criarUsuario(nome, email, senha):
+    collection.insert_one({
+        'nome': nome,
+        'email': email,
+        'senha': senha
+    })
+
+    subprocess.run(['python', 'home.py'])
+
+def lerDadosUsuario(nome):
+    findUser = collection.find({'nome': nome})
+    for user in findUser:
+        print(user)
+
+Login = Tk()
 
 width_screen = Login.winfo_screenwidth()
-height_screen = Login.winfo_screenheight() - taskBarHeight
+height_screen = Login.winfo_screenheight()
 
-width =990
+width = 990
 height = 600
 
 posx = (width_screen / 2) - (width / 2)
@@ -25,18 +42,20 @@ Login.geometry("%dx%d+%d+%d" % (width, height, posx, posy))
 Login.configure(bg='#fff')
 
 def entre():
-    subprocess.run(["python", "Home.py"])
+    subprocess.run(["python", "home.py"])
+def entredois():
+    subprocess.run(["python", "cadastro.py"])
 
 #titulo bem-vindo
 txt_titulo = Label(Login,text="Bem-vindo" ,bg = "#FFF", font=("Helvetica 20"), foreground="#F6AA1C")
 txt_titulo.place(relx = .119, rely = .30, anchor = "n")
 
-#Estilização do Login
-logo_quilon_origin = Image.open("img/QuilOn.png")
-logo_resize = logo_quilon_origin.resize((210, 50), Image.ANTIALIAS)
-logoquilon = ImageTk.PhotoImage(logo_resize)
-logo_qui = Label(Login, image = logoquilon , bg="#fff")
-logo_qui.place(relx = .140, rely = .40, anchor = "n")
+# #Estilização do Login
+# logo_quilon_origin = Image.open("img/QuilOn.png")
+# logo_resize = logo_quilon_origin.resize((210, 50), Image.ANTIALIAS)
+# logoquilon = ImageTk.PhotoImage(logo_resize)
+# logo_qui = Label(Login, image=logoquilon, bg="#fff")
+# logo_qui.place(relx=.140, rely=.40, anchor="n")
 
 #botao acesse sua conta
 acesso = Button(Login, text = "Acesso a sua conta", bd = 0, bg = "#FFF", fg = "#777777", font = "Helvetica 10 underline", activebackground = "#FFF", activeforeground = "#777")
@@ -87,19 +106,19 @@ lbl_nome = Entry(Login)
 lbl_nome.place(relx = .765, rely = .39, anchor = "n" ,  width="190" , height="20")
 
 #campo email
-txt_valor = Label(Login,text="E-mail" ,bg = "#FFF", font=("Helvetica 10"))
-txt_valor.place(relx = .690, rely = .45, anchor = "n")
-lbl_valor = Entry(Login)
-lbl_valor.place(relx = .765, rely = .49, anchor = "n",  width="190" , height="20")
+txt_email = Label(Login,text="E-mail" ,bg = "#FFF", font=("Helvetica 10"))
+txt_email.place(relx = .690, rely = .45, anchor = "n")
+lbl_email = Entry(Login)
+lbl_email.place(relx = .765, rely = .49, anchor = "n",  width="190" , height="20")
 
 #campo senha
-txt_duracao = Label(Login,text="Senha" ,bg = "#FFF", font=("Helvetica 10"))
-txt_duracao.place(relx = .690, rely = .55, anchor = "n")
-lbl_duracao = Entry(Login)
-lbl_duracao.place(relx = .765, rely = .59, anchor = "n",  width="190" , height="20")
+txt_senha = Label(Login,text="Senha" ,bg = "#FFF", font=("Helvetica 10"))
+txt_senha.place(relx = .690, rely = .55, anchor = "n")
+lbl_senha = Entry(Login)
+lbl_senha.place(relx = .765, rely = .59, anchor = "n",  width="190" , height="20")
 
 #botao cadastre-se
-btn_salvar=Button(Login,text="Cadastre-se", bg="#F6AA1C")
+btn_salvar=Button(Login,text="Cadastre-se", bg="#F6AA1C",command=lambda:criarUsuario(lbl_nome.get(), lbl_email.get(), lbl_senha.get()))
 btn_salvar.place(relx = .765, rely = .70, anchor = "n",  width="80" , height="25")
 
 Login.mainloop()
