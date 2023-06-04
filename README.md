@@ -9,6 +9,9 @@ Instale as seguintes bibliotecas em seu terminal
 °Pymongo :
 pip install pymongo
 
+°Bson:
+pip install bson
+
 °PIL :
 pip install Pillow
 
