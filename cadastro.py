@@ -211,10 +211,12 @@ lbl_senha = Entry(ca)
 lbl_senha.place(relx = .74, rely = .59, anchor = "n",  width="100" , height="20")
 
 #botao 
-btn_salvar=Button(ca,text="Cadastre-se", bg="#F6AA1C", command=lambda:criarUsuario(lbl_nome.get(), lbl_email.get(), lbl_senha.get()))
+btn_salvar=Button(ca,text="Cadastre-se", bg="#F6AA1C", command=lambda:criarUsuario(lbl_nome.get(),lbl_sexo.get(),lbl_data.get(),lbl_rg.get(),lbl_cpf.get(),lbl_endereço.get(),lbl_numero.get(),lbl_bairro.get(),lbl_cidade.get(),lbl_estado.get(),lbl_complemento.get(),lbl_telefone.get(),lbl_celular.get(),lbl_nq.get(),lbl_cq.get(),lbl_ll.get(),lbl_quilometro.get(), lbl_email.get(), lbl_senha.get()))
 btn_salvar.place(relx = .20, rely = .800, anchor = "n",  width="80" , height="25")
-btn_alterar = Button(ca, text="Alterar", bg="#F6AA1C", command=lambda: updateUsuario(lbl_nome.get(), lbl_email.get(), lbl_senha.get()))
+
+btn_alterar = Button(ca, text="Alterar", bg="#F6AA1C", command=lambda: updateUsuario(lbl_nome.get(),lbl_sexo.get(),lbl_data.get(),lbl_rg.get(),lbl_cpf.get(),lbl_endereço.get(),lbl_numero.get(),lbl_bairro.get(),lbl_cidade.get(),lbl_estado.get(),lbl_complemento.get(),lbl_telefone.get(),lbl_celular.get(),lbl_nq.get(),lbl_cq.get(),lbl_ll.get(),lbl_quilometro.get(), lbl_email.get(), lbl_senha.get()))
 btn_alterar.place(relx=.40, rely=.800, anchor="n", width="80", height="25")
+
 btn_excluir=Button(ca,text="Excluir", bg="#F6AA1C", command=lambda:excluirUsuario(lbl_email.get()))
 btn_excluir.place(relx = .60, rely = .800, anchor = "n",  width="80" , height="25")
 
@@ -241,7 +243,7 @@ def listar_dados():
         treeview.insert("", END, values=tuple(documento.values()))
 
 # Botão para listar os dados
-botao = Button(ca, text="Listar Dados",bg="#F6AA1C", command=lambda:listar_dados)
+botao = Button(ca, text="Listar Dados",bg="#F6AA1C", command=lambda:listar_dados())
 botao.place(relx = .80, rely = .800, anchor = "n",  width="80" , height="25")
 
 
