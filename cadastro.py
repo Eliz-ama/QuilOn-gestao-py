@@ -15,7 +15,8 @@ ca = Tk()
 
 def criarUsuario(nome, sexo, data, rg, cpf , endereco, numero, bairro, cidade, estado, complemento, telefone, celular, nq, cq, ll, quilometro, email, senha):
     findemail = collection.count_documents({'email': email})
-    if findemail != 0:
+
+    if findemail == 0:
         collection.insert_one({
             'nome': nome,
             'sexo': sexo,
@@ -211,6 +212,7 @@ lbl_senha = Entry(ca)
 lbl_senha.place(relx = .74, rely = .59, anchor = "n",  width="100" , height="20")
 
 #botao 
+
 btn_salvar=Button(ca,text="Cadastre-se", bg="#F6AA1C", command=lambda:criarUsuario(lbl_nome.get(),lbl_sexo.get(),lbl_data.get(),lbl_rg.get(),lbl_cpf.get(),lbl_endereço.get(),lbl_numero.get(),lbl_bairro.get(),lbl_cidade.get(),lbl_estado.get(),lbl_complemento.get(),lbl_telefone.get(),lbl_celular.get(),lbl_nq.get(),lbl_cq.get(),lbl_ll.get(),lbl_quilometro.get(), lbl_email.get(), lbl_senha.get()))
 btn_salvar.place(relx = .20, rely = .800, anchor = "n",  width="80" , height="25")
 
