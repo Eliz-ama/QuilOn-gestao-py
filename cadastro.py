@@ -39,6 +39,8 @@ def criarUsuario(nome, sexo, data, rg, cpf , endereco, numero, bairro, cidade, e
             'senha': senha
         })
 
+        subprocess.run(['python', 'rotateImg.py'])
+
 def updateUsuario(nome, sexo, data, rg, cpf , endereco, numero, bairro, cidade, estado, complemento, telefone, celular, nq, cq, ll, quilometro, email, senha):
     collection.update_one({'email': email}, {'$set': {
            'nome': nome,
