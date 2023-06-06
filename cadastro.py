@@ -1,6 +1,4 @@
 from pymongo import MongoClient
-from bson import ObjectId
-from PIL import Image, ImageTk
 from tkinter import *
 from tkinter import ttk
 
@@ -90,7 +88,6 @@ ca.configure(bg='#fff')
 
 def entre():
     subprocess.run(["python", "home.py"])
-
 
 #titulo entrar
 txt_titulo = Label(ca,text="Cadastre seu Quilombo" ,bg = "#FFF", font=("Helvetica 20"), foreground="#F6AA1C")
@@ -214,7 +211,6 @@ lbl_senha = Entry(ca)
 lbl_senha.place(relx = .74, rely = .59, anchor = "n",  width="100" , height="20")
 
 #botao 
-
 btn_salvar=Button(ca,text="Cadastre-se", bg="#F6AA1C", command=lambda:criarUsuario(lbl_nome.get(),lbl_sexo.get(),lbl_data.get(),lbl_rg.get(),lbl_cpf.get(),lbl_endereço.get(),lbl_numero.get(),lbl_bairro.get(),lbl_cidade.get(),lbl_estado.get(),lbl_complemento.get(),lbl_telefone.get(),lbl_celular.get(),lbl_nq.get(),lbl_cq.get(),lbl_ll.get(),lbl_quilometro.get(), lbl_email.get(), lbl_senha.get()))
 btn_salvar.place(relx = .20, rely = .800, anchor = "n",  width="80" , height="25")
 
@@ -224,31 +220,24 @@ btn_alterar.place(relx=.40, rely=.800, anchor="n", width="80", height="25")
 btn_excluir=Button(ca,text="Excluir", bg="#F6AA1C", command=lambda:excluirUsuario(lbl_email.get()))
 btn_excluir.place(relx = .60, rely = .800, anchor = "n",  width="80" , height="25")
 
-
 def listar_dados():
-    dados = collection.find()  # Obtém todos os documentos da coleção
+    dados = collection.find()
 
-    # Cria uma nova janela para exibir os dados
     janela_dados = Toplevel(ca)
 
-    # Cria uma Treeview para exibir os dados em uma tabela
     treeview = ttk.Treeview(janela_dados)
     treeview.pack()
 
-    # Define as colunas da tabela
     treeview["columns"] = tuple(dados[0].keys())
 
-    # Define os cabeçalhos das colunas
     for column in treeview["columns"]:
         treeview.heading(column, text=column)
 
-    # Adiciona os dados à tabela
     for documento in dados:
         treeview.insert("", END, values=tuple(documento.values()))
 
 # Botão para listar os dados
 botao = Button(ca, text="Listar Dados",bg="#F6AA1C", command=lambda:listar_dados())
 botao.place(relx = .80, rely = .800, anchor = "n",  width="80" , height="25")
-
 
 ca.mainloop()
