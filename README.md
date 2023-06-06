@@ -18,3 +18,11 @@ pip install Pillow
 °Tkinter:
 python -m tkinter
 
+°cv2:
+pip install opencv-python
+
+°Numpy:
+pip install numpy
+
+
+
